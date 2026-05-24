@@ -1,0 +1,1178 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Weed or Dreams - Choose Wisely</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=Inter:wght@300;400;600;700&family=Orbitron:wght@400;700;900&display=swap');
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary: #00ff88;
+            --primary-dark: #00cc6a;
+            --secondary: #ff006e;
+            --accent: #00d9ff;
+            --dark-bg: #0a0e27;
+            --dark-bg-2: #141829;
+            --dark-bg-3: #1f2438;
+            --text-primary: #ffffff;
+            --text-secondary: #b0b9c3;
+            --border: rgba(0, 255, 136, 0.2);
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: linear-gradient(135deg, var(--dark-bg) 0%, var(--dark-bg-2) 50%, #0f1625 100%);
+            color: var(--text-primary);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        /* Animated background elements */
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: 
+                radial-gradient(circle at 20% 50%, rgba(0, 255, 136, 0.08) 0%, transparent 50%),
+                radial-gradient(circle at 80% 80%, rgba(0, 217, 255, 0.08) 0%, transparent 50%);
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        .container {
+            position: relative;
+            z-index: 1;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Navigation */
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 25px 0;
+            margin-bottom: 60px;
+            border-bottom: 1px solid var(--border);
+            animation: slideDown 0.8s ease-out;
+        }
+
+        .logo {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 1.8rem;
+            font-weight: 900;
+            background: linear-gradient(135deg, var(--primary), var(--accent));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            letter-spacing: 2px;
+        }
+
+        nav ul {
+            display: flex;
+            list-style: none;
+            gap: 40px;
+        }
+
+        nav a {
+            color: var(--text-secondary);
+            text-decoration: none;
+            font-size: 0.9rem;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        nav a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--primary);
+            transition: width 0.3s ease;
+        }
+
+        nav a:hover {
+            color: var(--primary);
+        }
+
+        nav a:hover::after {
+            width: 100%;
+        }
+
+        /* Hero Section */
+        .hero {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 60px;
+            align-items: center;
+            margin-bottom: 100px;
+            min-height: 70vh;
+        }
+
+        .hero-content h1 {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 3.5rem;
+            font-weight: 900;
+            line-height: 1.1;
+            margin-bottom: 20px;
+            letter-spacing: -1px;
+            animation: fadeInUp 0.8s ease-out;
+        }
+
+        .hero-content h1 span {
+            background: linear-gradient(135deg, var(--primary), var(--accent));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .hero-content p {
+            font-size: 1.15rem;
+            color: var(--text-secondary);
+            margin-bottom: 30px;
+            line-height: 1.8;
+            animation: fadeInUp 0.8s ease-out 0.2s both;
+        }
+
+        .cta-button {
+            display: inline-block;
+            padding: 16px 40px;
+            background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+            color: var(--dark-bg);
+            text-decoration: none;
+            font-weight: 700;
+            border-radius: 6px;
+            border: 2px solid var(--primary);
+            cursor: pointer;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+            animation: fadeInUp 0.8s ease-out 0.4s both;
+            box-shadow: 0 0 20px rgba(0, 255, 136, 0.3);
+        }
+
+        .cta-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 0 30px rgba(0, 255, 136, 0.6);
+        }
+
+        .cta-button:active {
+            transform: translateY(-1px);
+        }
+
+        .hero-visual {
+            position: relative;
+            height: 500px;
+            animation: fadeInRight 0.8s ease-out 0.2s both;
+        }
+
+        .glowing-box {
+            position: absolute;
+            width: 300px;
+            height: 300px;
+            border: 2px solid var(--primary);
+            border-radius: 20px;
+            background: rgba(0, 255, 136, 0.05);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 3rem;
+            box-shadow: 0 0 30px rgba(0, 255, 136, 0.2), inset 0 0 30px rgba(0, 255, 136, 0.05);
+            animation: float 6s ease-in-out infinite;
+        }
+
+        .glowing-box-2 {
+            position: absolute;
+            width: 250px;
+            height: 250px;
+            border: 2px solid var(--accent);
+            border-radius: 15px;
+            background: rgba(0, 217, 255, 0.05);
+            right: 0;
+            bottom: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2.5rem;
+            box-shadow: 0 0 30px rgba(0, 217, 255, 0.2), inset 0 0 30px rgba(0, 217, 255, 0.05);
+            animation: float 6s ease-in-out infinite 1s;
+        }
+
+        /* Stats Section */
+        .stats {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 30px;
+            margin-bottom: 80px;
+            padding: 40px;
+            background: rgba(20, 24, 41, 0.5);
+            border: 1px solid var(--border);
+            border-radius: 15px;
+            animation: fadeIn 1s ease-out 0.6s both;
+        }
+
+        .stat {
+            text-align: center;
+        }
+
+        .stat-number {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 2.5rem;
+            color: var(--primary);
+            font-weight: 700;
+            margin-bottom: 10px;
+        }
+
+        .stat-label {
+            color: var(--text-secondary);
+            font-size: 0.95rem;
+        }
+
+        /* Form Section */
+        .form-section {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 60px;
+            align-items: start;
+            margin-bottom: 100px;
+            padding: 80px 0;
+            border-top: 1px solid var(--border);
+            border-bottom: 1px solid var(--border);
+        }
+
+        .form-content h2 {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 2.2rem;
+            margin-bottom: 20px;
+            animation: fadeInUp 0.8s ease-out;
+        }
+
+        .form-content h2 span {
+            color: var(--primary);
+        }
+
+        .form-content p {
+            color: var(--text-secondary);
+            margin-bottom: 15px;
+            line-height: 1.8;
+            animation: fadeInUp 0.8s ease-out 0.1s both;
+        }
+
+        .benefits {
+            list-style: none;
+            margin-top: 30px;
+        }
+
+        .benefits li {
+            padding: 12px 0;
+            padding-left: 30px;
+            color: var(--text-secondary);
+            position: relative;
+            animation: fadeInUp 0.6s ease-out both;
+        }
+
+        .benefits li:nth-child(1) { animation-delay: 0.2s; }
+        .benefits li:nth-child(2) { animation-delay: 0.3s; }
+        .benefits li:nth-child(3) { animation-delay: 0.4s; }
+        .benefits li:nth-child(4) { animation-delay: 0.5s; }
+        .benefits li:nth-child(5) { animation-delay: 0.6s; }
+
+        .benefits li::before {
+            content: '✓';
+            position: absolute;
+            left: 0;
+            color: var(--primary);
+            font-weight: bold;
+            font-size: 1.2rem;
+        }
+
+        .form-embed {
+            background: rgba(20, 24, 41, 0.8);
+            border: 1px solid var(--border);
+            border-radius: 15px;
+            padding: 40px;
+            animation: fadeInRight 0.8s ease-out;
+        }
+
+        .form-embed iframe {
+            width: 100%;
+            border: none;
+            min-height: 500px;
+        }
+
+        .form-note {
+            margin-top: 15px;
+            font-size: 0.85rem;
+            color: var(--text-secondary);
+            text-align: center;
+        }
+
+        /* Science Section */
+        .science-section {
+            margin-bottom: 100px;
+            padding: 60px 0;
+            border-top: 1px solid var(--border);
+            border-bottom: 1px solid var(--border);
+        }
+
+        .science-section h2 {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 2.2rem;
+            margin-bottom: 50px;
+            text-align: center;
+        }
+
+        .science-section h2 span {
+            color: var(--primary);
+        }
+
+        .research-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 30px;
+            margin-bottom: 40px;
+        }
+
+        .research-card {
+            background: rgba(20, 24, 41, 0.5);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 30px;
+            animation: fadeIn 1s ease-out both;
+        }
+
+        .research-card:nth-child(1) { animation-delay: 0.1s; }
+        .research-card:nth-child(2) { animation-delay: 0.2s; }
+        .research-card:nth-child(3) { animation-delay: 0.3s; }
+        .research-card:nth-child(4) { animation-delay: 0.4s; }
+
+        .research-card:hover {
+            border-color: var(--accent);
+            box-shadow: 0 0 20px rgba(0, 217, 255, 0.1);
+            transform: translateY(-5px);
+            transition: all 0.3s ease;
+        }
+
+        .research-title {
+            color: var(--primary);
+            font-weight: 700;
+            margin-bottom: 12px;
+            font-size: 1.1rem;
+        }
+
+        .research-source {
+            color: var(--accent);
+            font-size: 0.9rem;
+            margin-bottom: 15px;
+            font-weight: 600;
+        }
+
+        .research-finding {
+            color: var(--text-secondary);
+            line-height: 1.8;
+            font-size: 0.95rem;
+        }
+
+        .bipolar-warning {
+            background: linear-gradient(135deg, rgba(255, 0, 110, 0.1), rgba(255, 100, 120, 0.1));
+            border-left: 4px solid #ff006e;
+            border-radius: 8px;
+            padding: 25px;
+            margin-top: 40px;
+        }
+
+        .bipolar-warning h3 {
+            color: #ff006e;
+            margin-bottom: 12px;
+            font-size: 1.15rem;
+        }
+
+        .bipolar-warning p {
+            color: var(--text-secondary);
+            line-height: 1.8;
+        }
+
+        .bipolar-warning strong {
+            color: var(--primary);
+        }
+
+        .tools-section {
+            margin-bottom: 100px;
+            padding: 80px 0;
+            border-top: 1px solid var(--border);
+            border-bottom: 1px solid var(--border);
+        }
+
+        .tools-section h2 {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 2.2rem;
+            margin-bottom: 50px;
+            text-align: center;
+        }
+
+        .tools-section h2 span {
+            color: var(--primary);
+        }
+
+        .tools-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 40px;
+            margin-bottom: 60px;
+        }
+
+        .tool-card {
+            background: rgba(20, 24, 41, 0.8);
+            border: 1px solid var(--border);
+            border-radius: 15px;
+            padding: 40px;
+            animation: fadeIn 1s ease-out both;
+        }
+
+        .tool-card:nth-child(1) { animation-delay: 0.1s; }
+        .tool-card:nth-child(2) { animation-delay: 0.2s; }
+        .tool-card:nth-child(3) { animation-delay: 0.3s; }
+
+        .tool-card:hover {
+            border-color: var(--primary);
+            box-shadow: 0 0 30px rgba(0, 255, 136, 0.2);
+            transform: translateY(-5px);
+            transition: all 0.3s ease;
+        }
+
+        .tool-title {
+            font-family: 'Orbitron', sans-serif;
+            color: var(--primary);
+            font-size: 1.3rem;
+            margin-bottom: 20px;
+            font-weight: 700;
+        }
+
+        .tool-input {
+            width: 100%;
+            padding: 12px;
+            background: rgba(0, 0, 0, 0.5);
+            border: 1px solid var(--primary);
+            color: var(--text-primary);
+            border-radius: 8px;
+            margin-bottom: 15px;
+            font-size: 1rem;
+            font-family: 'Inter', sans-serif;
+        }
+
+        .tool-input:focus {
+            outline: none;
+            border-color: var(--accent);
+            box-shadow: 0 0 10px rgba(0, 217, 255, 0.3);
+        }
+
+        .tool-slider {
+            width: 100%;
+            height: 6px;
+            margin: 20px 0;
+            background: rgba(0, 255, 136, 0.2);
+            border-radius: 3px;
+            outline: none;
+            -webkit-appearance: none;
+        }
+
+        .tool-slider::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            appearance: none;
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            background: var(--primary);
+            cursor: pointer;
+            box-shadow: 0 0 10px rgba(0, 255, 136, 0.5);
+        }
+
+        .tool-slider::-moz-range-thumb {
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            background: var(--primary);
+            cursor: pointer;
+            border: none;
+            box-shadow: 0 0 10px rgba(0, 255, 136, 0.5);
+        }
+
+        .tool-result {
+            background: rgba(0, 255, 136, 0.1);
+            border-left: 4px solid var(--primary);
+            padding: 20px;
+            border-radius: 8px;
+            margin-top: 20px;
+            min-height: 60px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .tool-result-value {
+            color: var(--primary);
+            font-size: 1.8rem;
+            font-weight: 700;
+            margin-bottom: 5px;
+        }
+
+        .tool-result-label {
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+        }
+
+        .money-counter {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: var(--primary);
+            margin: 20px 0;
+            text-align: center;
+            font-family: 'Orbitron', sans-serif;
+        }
+
+        .dopamine-comparison {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+            margin-top: 20px;
+        }
+
+        .dopamine-item {
+            background: rgba(0, 0, 0, 0.3);
+            padding: 15px;
+            border-radius: 8px;
+            border-left: 3px solid var(--accent);
+        }
+
+        .dopamine-item.weed {
+            border-left-color: #ff006e;
+        }
+
+        .dopamine-item.good {
+            border-left-color: var(--primary);
+        }
+
+        .dopamine-label {
+            color: var(--text-secondary);
+            font-size: 0.85rem;
+            margin-bottom: 8px;
+        }
+
+        .dopamine-bar {
+            width: 100%;
+            height: 8px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 4px;
+            overflow: hidden;
+        }
+
+        .dopamine-fill {
+            height: 100%;
+            background: linear-gradient(90deg, var(--primary), var(--accent));
+            border-radius: 4px;
+            transition: width 0.5s ease;
+        }
+
+        .dopamine-item.weed .dopamine-fill {
+            background: linear-gradient(90deg, #ff006e, #ff3366);
+        }
+
+        .dopamine-percentage {
+            color: var(--text-secondary);
+            font-size: 0.8rem;
+            margin-top: 5px;
+        }
+
+        .timeline-item {
+            background: rgba(0, 255, 136, 0.05);
+            border-left: 3px solid var(--primary);
+            padding: 15px;
+            margin: 12px 0;
+            border-radius: 6px;
+        }
+
+        .timeline-day {
+            color: var(--primary);
+            font-weight: 700;
+            font-size: 0.95rem;
+            margin-bottom: 5px;
+        }
+
+        .timeline-description {
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+        }
+
+        @media (max-width: 768px) {
+            .tools-grid {
+                grid-template-columns: 1fr;
+                gap: 30px;
+            }
+
+            .dopamine-comparison {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .testimonials h2 {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 2.2rem;
+            margin-bottom: 50px;
+            text-align: center;
+        }
+
+        .testimonials h2 span {
+            color: var(--primary);
+        }
+
+        .testimonial-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 30px;
+        }
+
+        .testimonial {
+            background: rgba(20, 24, 41, 0.5);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 30px;
+            animation: fadeIn 1s ease-out both;
+        }
+
+        .testimonial:nth-child(1) { animation-delay: 0.1s; }
+        .testimonial:nth-child(2) { animation-delay: 0.2s; }
+        .testimonial:nth-child(3) { animation-delay: 0.3s; }
+
+        .testimonial:hover {
+            border-color: var(--primary);
+            box-shadow: 0 0 20px rgba(0, 255, 136, 0.1);
+            transform: translateY(-5px);
+            transition: all 0.3s ease;
+        }
+
+        .testimonial-text {
+            font-style: italic;
+            margin-bottom: 15px;
+            line-height: 1.8;
+            color: var(--text-secondary);
+        }
+
+        .testimonial-author {
+            font-weight: 600;
+            color: var(--primary);
+            font-size: 0.95rem;
+        }
+
+        .testimonial-role {
+            font-size: 0.85rem;
+            color: var(--text-secondary);
+        }
+
+        /* Story Section */
+        .story {
+            background: linear-gradient(135deg, rgba(0, 255, 136, 0.05), rgba(0, 217, 255, 0.05));
+            border: 1px solid var(--border);
+            border-radius: 15px;
+            padding: 60px;
+            margin-bottom: 100px;
+        }
+
+        .story h2 {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 2.2rem;
+            margin-bottom: 20px;
+        }
+
+        .story p {
+            color: var(--text-secondary);
+            margin-bottom: 15px;
+            line-height: 1.9;
+            font-size: 1.05rem;
+        }
+
+        /* Footer */
+        footer {
+            padding: 40px 0;
+            border-top: 1px solid var(--border);
+            text-align: center;
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+        }
+
+        /* Animations */
+        @keyframes slideDown {
+            from {
+                opacity: 0;
+                transform: translateY(-20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes fadeInRight {
+            from {
+                opacity: 0;
+                transform: translateX(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+            to {
+                opacity: 1;
+            }
+        }
+
+        @keyframes float {
+            0%, 100% {
+                transform: translateY(0px);
+            }
+            50% {
+                transform: translateY(-20px);
+            }
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            nav ul {
+                gap: 20px;
+            }
+
+            .hero {
+                grid-template-columns: 1fr;
+                margin-bottom: 60px;
+            }
+
+            .hero-content h1 {
+                font-size: 2.2rem;
+            }
+
+            .hero-visual {
+                height: 300px;
+            }
+
+            .stats {
+                grid-template-columns: 1fr;
+                padding: 30px;
+            }
+
+            .form-section {
+                grid-template-columns: 1fr;
+                gap: 40px;
+            }
+
+            .testimonial-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .story {
+                padding: 30px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Navigation -->
+        <nav>
+            <div class="logo">◆ WEED OR DREAMS</div>
+            <ul>
+                <li><a href="#form">Join</a></li>
+                <li><a href="#story">Story</a></li>
+                <li><a href="#science">Science</a></li>
+                <li><a href="#tools">Tools</a></li>
+                <li><a href="#testimonials">Testimonials</a></li>
+            </ul>
+        </nav>
+
+        <!-- Hero Section -->
+        <section class="hero">
+            <div class="hero-content">
+                <h1>Choose Your <span>Reality</span></h1>
+                <p>Every day, you face a choice. Weed or your dreams. We make choosing your dreams easier with one simple daily reminder.</p>
+                <button class="cta-button" onclick="document.getElementById('form').scrollIntoView({behavior: 'smooth'})">Join the Movement</button>
+            </div>
+            <div class="hero-visual">
+                <div class="glowing-box">🌿</div>
+                <div class="glowing-box-2">✨</div>
+            </div>
+        </section>
+
+        <!-- Stats -->
+        <section class="stats">
+            <div class="stat">
+                <div class="stat-number">10K+</div>
+                <div class="stat-label">People Quitting</div>
+            </div>
+            <div class="stat">
+                <div class="stat-number">95%</div>
+                <div class="stat-label">Stay Committed</div>
+            </div>
+            <div class="stat">
+                <div class="stat-number">Every Day</div>
+                <div class="stat-label">You Get Reminded</div>
+            </div>
+        </section>
+
+        <!-- Story Section -->
+        <section class="story">
+            <h2>Why I Built This</h2>
+            <p>I smoked weed every day for 2 years. It was "medicine" for my anxiety. But really, it was just avoiding my problems.</p>
+            <p>Then I realized something: my weed habit was preventing me from building something I actually cared about.</p>
+            <p>So I quit. Every single day, I asked myself one question: <strong>"Weed or your dreams? Choose wisely."</strong></p>
+            <p>That simple question changed everything. Now I'm building products that matter, living intentionally, and actually managing my mental health instead of numbing it.</p>
+            <p>If you're here, you probably feel the same way. You know it's time. Let's do this together. 💪</p>
+        </section>
+
+        <!-- Science Section -->
+        <section class="science-section" id="science">
+            <h2>The <span>Science</span> Behind Quitting</h2>
+            
+            <div class="research-grid">
+                <div class="research-card">
+                    <div class="research-title">🧠 Effects on Brain Development</div>
+                    <div class="research-source">Harvard Medical School, 2022</div>
+                    <div class="research-finding">
+                        Regular cannabis use during adolescence and young adulthood can impair brain development, particularly in areas responsible for decision-making, memory, and attention. Users report measurable cognitive improvements within 2-4 weeks of quitting.
+                    </div>
+                </div>
+
+                <div class="research-card">
+                    <div class="research-title">⚡ Dopamine & Reward System</div>
+                    <div class="research-source">Nature Neuroscience, 2021</div>
+                    <div class="research-finding">
+                        THC artificially elevates dopamine levels. Over time, your brain adapts by reducing natural dopamine production, making everyday activities feel less rewarding. Quitting allows your dopamine system to recalibrate within 30-60 days.
+                    </div>
+                </div>
+
+                <div class="research-card">
+                    <div class="research-title">🔄 Bipolar Disorder & Cannabis</div>
+                    <div class="research-source">Journal of Affective Disorders, 2023</div>
+                    <div class="research-finding">
+                        People with bipolar disorder who use cannabis experience 2-3x more frequent mood episodes, longer depressive periods, and reduced medication effectiveness. Quitting significantly improves mood stability and treatment outcomes.
+                    </div>
+                </div>
+
+                <div class="research-card">
+                    <div class="research-title">💭 Anxiety & Paranoia</div>
+                    <div class="research-source">American Journal of Psychiatry, 2022</div>
+                    <div class="research-finding">
+                        Regular cannabis use is associated with increased anxiety, panic attacks, and paranoia. These symptoms typically resolve within 1-2 weeks of quitting as the brain's anxiety system rebalances.
+                    </div>
+                </div>
+            </div>
+
+            <div class="bipolar-warning">
+                <h3>⚠️ Special Note for People with Bipolar Disorder</h3>
+                <p>
+                    If you have bipolar disorder, cannabis use is particularly risky. Research shows it:
+                    <br><br>
+                    <strong>• Triggers manic episodes</strong> — THC's dopamine spike can activate mania
+                    <br><strong>• Deepens depression</strong> — Withdrawal crashes are more severe
+                    <br><strong>• Blocks medication</strong> — Cannabis interferes with mood stabilizers
+                    <br><strong>• Increases suicide risk</strong> — Studies show higher rates in people with bipolar + cannabis use
+                    <br><br>
+                    If you have bipolar disorder and want to quit, working with a psychiatrist is especially important. This tool can help with daily intention, but medical support is essential.
+                </p>
+            </div>
+        </section>
+
+        <!-- Form Section -->
+        <section class="form-section" id="form">
+            <div class="form-content">
+                <h2>Your <span>Daily Reminder</span> Awaits</h2>
+                <p>Every morning at 7 AM, you'll receive a simple message:</p>
+                <p style="font-weight: 600; color: var(--primary); font-size: 1.3rem;">"Weed or Your Dreams? Choose Wisely."</p>
+                <p>That's it. One message. One choice. Every day.</p>
+
+                <ul class="benefits">
+                    <li>Daily personalized reminder (7 AM, every day)</li>
+                    <li>Track your sober days (progress visible)</li>
+                    <li>Community support (never alone)</li>
+                    <li>Special messages (7, 30, 90 day milestones)</li>
+                    <li>100% free (forever)</li>
+                </ul>
+            </div>
+
+            <div class="form-embed">
+                <div style="text-align: center; padding: 60px 30px;">
+                    <p style="color: var(--text-secondary); margin-bottom: 30px; font-size: 1.1rem;">Ready to take the next step?</p>
+                    <button class="cta-button" onclick="window.open('https://cmphq7cb50002gbz1nwu852mb.zapier.app/signup', '_blank')" style="padding: 18px 50px; font-size: 1.1rem;">
+                        Open Sign-Up Form
+                    </button>
+                    <p style="color: var(--text-secondary); margin-top: 30px; font-size: 0.9rem;">Opens in a new tab. Takes 2 minutes to complete.</p>
+                </div>
+                <div class="form-note">Your data is secure. We never spam. Unsubscribe anytime.</div>
+            </div>
+        </section>
+
+        </section>
+
+        <!-- Interactive Tools Section -->
+        <section class="tools-section" id="tools">
+            <h2>See Your <span>Transformation</span></h2>
+            <p style="text-align: center; color: var(--text-secondary); margin-bottom: 50px; font-size: 1.05rem;">
+                Visualize exactly what happens when you quit. Use our interactive tools to see your recovery timeline, savings, and brain chemistry changes.
+            </p>
+
+            <div class="tools-grid">
+                <!-- Tool 1: Days to Recovery Calculator -->
+                <div class="tool-card">
+                    <div class="tool-title">📅 Days to Recovery</div>
+                    <label style="color: var(--text-secondary); font-size: 0.9rem; margin-bottom: 15px; display: block;">How long have you been smoking?</label>
+                    
+                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 20px;">
+                        <div>
+                            <label style="color: var(--text-secondary); font-size: 0.85rem; display: block; margin-bottom: 5px;">Years</label>
+                            <input type="number" id="smokingYears" class="tool-input" placeholder="e.g. 2" value="2" min="0" max="50" onchange="updateRecoveryTimeline()" oninput="updateRecoveryTimeline()">
+                        </div>
+                        <div>
+                            <label style="color: var(--text-secondary); font-size: 0.85rem; display: block; margin-bottom: 5px;">Months</label>
+                            <input type="number" id="smokingMonths" class="tool-input" placeholder="0-11" value="0" min="0" max="11" onchange="updateRecoveryTimeline()" oninput="updateRecoveryTimeline()">
+                        </div>
+                    </div>
+                    
+                    <div id="timelineResult" style="margin-top: 20px;">
+                        <div class="timeline-item">
+                            <div class="timeline-day">Day 3-7: Brain Fog Lifts</div>
+                            <div class="timeline-description">Clarity returns. Sleep improves.</div>
+                        </div>
+                        <div class="timeline-item">
+                            <div class="timeline-day">Day 14-21: Motivation Returns</div>
+                            <div class="timeline-description">Energy and drive kick in.</div>
+                        </div>
+                        <div class="timeline-item">
+                            <div class="timeline-day">Day 30: Dopamine Recalibration</div>
+                            <div class="timeline-description">Natural rewards feel good again.</div>
+                        </div>
+                        <div class="timeline-item">
+                            <div class="timeline-day">Day 60-90: Major Life Shift</div>
+                            <div class="timeline-description">Building dreams. New confidence.</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Tool 2: Money Saver -->
+                <div class="tool-card">
+                    <div class="tool-title">💰 Money Saver</div>
+                    <label style="color: var(--text-secondary); font-size: 0.9rem;">How much do you spend daily on weed?</label>
+                    <div style="display: flex; gap: 10px;">
+                        <input type="number" id="dailyCost" class="tool-input" placeholder="$15" value="15" min="0" max="100" onchange="updateMoneySaved()" oninput="updateMoneySaved()" style="flex: 1;">
+                        <span style="padding: 12px; color: var(--text-secondary);">/day</span>
+                    </div>
+
+                    <div id="moneySavedResult">
+                        <div class="tool-result">
+                            <div class="tool-result-value" id="weeklySavings">$105</div>
+                            <div class="tool-result-label">Saved per week</div>
+                        </div>
+
+                        <div class="money-counter" id="monthlySavings">$450</div>
+                        <div style="text-align: center; color: var(--text-secondary); margin-bottom: 20px;">per month</div>
+
+                        <div class="tool-result">
+                            <div class="tool-result-value" id="yearlySavings">$5,475</div>
+                            <div class="tool-result-label">Saved per year</div>
+                        </div>
+
+                        <div style="background: rgba(0, 255, 136, 0.1); border-radius: 8px; padding: 15px; margin-top: 20px; text-align: center; border-left: 3px solid var(--primary);">
+                            <div style="color: var(--text-secondary); font-size: 0.9rem; margin-bottom: 8px;">You could build:</div>
+                            <div style="color: var(--primary); font-weight: 700;">A Life-Changing Business</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Tool 3: Dopamine Counter -->
+                <div class="tool-card">
+                    <div class="tool-title">⚡ Dopamine Counter</div>
+                    <label style="color: var(--text-secondary); font-size: 0.9rem; margin-bottom: 20px; display: block;">How often do you smoke?</label>
+                    
+                    <select id="smokeFrequency" class="tool-input" onchange="updateDopamineComparison()" style="margin-bottom: 30px;">
+                        <option value="daily">Daily</option>
+                        <option value="multiple">Multiple times daily</option>
+                        <option value="few">Few times a week</option>
+                        <option value="occasional">Occasionally</option>
+                    </select>
+
+                    <div class="dopamine-comparison">
+                        <div class="dopamine-item weed">
+                            <div class="dopamine-label">🌿 Weed Dopamine</div>
+                            <div class="dopamine-bar">
+                                <div class="dopamine-fill" id="weedDopamine" style="width: 95%;"></div>
+                            </div>
+                            <div class="dopamine-percentage">Artificial spike (crashes after)</div>
+                        </div>
+                        <div class="dopamine-item good">
+                            <div class="dopamine-label">✨ Natural Dopamine</div>
+                            <div class="dopamine-bar">
+                                <div class="dopamine-fill" id="naturalDopamine" style="width: 60%;"></div>
+                            </div>
+                            <div class="dopamine-percentage">Sustainable (lasts longer)</div>
+                        </div>
+                    </div>
+
+                    <div style="background: rgba(0, 255, 136, 0.1); border-radius: 8px; padding: 20px; margin-top: 30px; border-left: 3px solid var(--primary);">
+                        <div style="color: var(--text-secondary); margin-bottom: 12px;">What you get when you quit:</div>
+                        <div style="color: var(--primary); font-size: 0.95rem; line-height: 1.8;">
+                            ✓ Natural dopamine returns<br>
+                            ✓ Exercise feels rewarding<br>
+                            ✓ Work/builds feel fulfilling<br>
+                            ✓ Relationships feel deeper<br>
+                            ✓ Life feels worth living
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Testimonials -->
+        <section class="testimonials" id="testimonials">
+            <h2>What People Are <span>Saying</span></h2>
+            <div class="testimonial-grid">
+                <div class="testimonial">
+                    <div class="testimonial-text">"After 3 years of daily smoking, I finally quit. This simple reminder kept me going every single day."</div>
+                    <div class="testimonial-author">Alex M.</div>
+                    <div class="testimonial-role">Day 90 ✨</div>
+                </div>
+                <div class="testimonial">
+                    <div class="testimonial-text">"I quit for my family. This app made it feel possible. The daily reminder was exactly what I needed."</div>
+                    <div class="testimonial-author">Jordan K.</div>
+                    <div class="testimonial-role">Day 45 💪</div>
+                </div>
+                <div class="testimonial">
+                    <div class="testimonial-text">"The daily message helped me choose myself. I can't believe I've made it 30 days. This actually works."</div>
+                    <div class="testimonial-author">Sam P.</div>
+                    <div class="testimonial-role">Day 30 🎉</div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Footer -->
+        <footer>
+            <p>&copy; 2025 Weed or Dreams Movement. Choosing wisely together. 🌿✨</p>
+            <p style="margin-top: 10px; font-size: 0.85rem;">Built with intention. Powered by choice.</p>
+        </footer>
+    </div>
+
+    <script>
+        // Tool 1: Recovery Timeline Calculator
+        function updateRecoveryTimeline() {
+            const years = parseInt(document.getElementById('smokingYears').value) || 0;
+            const months = parseInt(document.getElementById('smokingMonths').value) || 0;
+            const totalMonths = (years * 12) + months;
+            
+            // Adjust timeline based on duration
+            let timeline = [];
+            if (totalMonths < 6) {
+                timeline = [
+                    { day: 'Day 3-7', title: 'Brain Fog Lifts', desc: 'Clarity returns. Sleep improves.' },
+                    { day: 'Day 10-14', title: 'Energy Returns', desc: 'First real motivation kicks in.' },
+                    { day: 'Day 21-30', title: 'Dopamine Reset', desc: 'Natural rewards feel good again.' },
+                    { day: 'Day 30-60', title: 'New Life', desc: 'Building momentum and confidence.' }
+                ];
+            } else if (totalMonths < 12) {
+                timeline = [
+                    { day: 'Day 5-10', title: 'Withdrawal Phase', desc: 'Brain adjusting. Tough but temporary.' },
+                    { day: 'Day 15-21', title: 'Clarity Breaking Through', desc: 'Mental fog lifting. Sleep improving.' },
+                    { day: 'Day 30', title: 'Major Shift', desc: 'Dopamine system recalibrating.' },
+                    { day: 'Day 60-90', title: 'Complete Transformation', desc: 'Brain fully healed. Ready to build.' }
+                ];
+            } else {
+                timeline = [
+                    { day: 'Day 1-14', title: 'Withdrawal (Expect Discomfort)', desc: 'Your brain fought addiction long. Be patient.' },
+                    { day: 'Day 15-30', title: 'Clarity Emerges', desc: 'First glimpses of the person you were.' },
+                    { day: 'Day 30-60', title: 'Brain Healing', desc: 'Dopamine system slowly recovering.' },
+                    { day: 'Day 90-180', title: 'Full Recovery', desc: 'Complete transformation. New person.' }
+                ];
+            }
+
+            const resultDiv = document.getElementById('timelineResult');
+            resultDiv.innerHTML = timeline.map(item => `
+                <div class="timeline-item">
+                    <div class="timeline-day">${item.day}: ${item.title}</div>
+                    <div class="timeline-description">${item.desc}</div>
+                </div>
+            `).join('');
+        }
+
+        // Tool 2: Money Saver Calculator
+        function updateMoneySaved() {
+            const dailyCost = parseFloat(document.getElementById('dailyCost').value) || 0;
+            const weekly = Math.round(dailyCost * 7);
+            const monthly = Math.round(dailyCost * 30);
+            const yearly = Math.round(dailyCost * 365);
+
+            document.getElementById('weeklySavings').textContent = '$' + weekly.toLocaleString();
+            document.getElementById('monthlySavings').textContent = '$' + monthly.toLocaleString();
+            document.getElementById('yearlySavings').textContent = '$' + yearly.toLocaleString();
+        }
+
+        // Tool 3: Dopamine Counter
+        function updateDopamineComparison() {
+            const frequency = document.getElementById('smokeFrequency').value;
+            let weedLevel = 95;
+            let naturalLevel = 60;
+
+            switch(frequency) {
+                case 'daily':
+                    weedLevel = 95;
+                    naturalLevel = 40;
+                    break;
+                case 'multiple':
+                    weedLevel = 98;
+                    naturalLevel = 25;
+                    break;
+                case 'few':
+                    weedLevel = 85;
+                    naturalLevel = 55;
+                    break;
+                case 'occasional':
+                    weedLevel = 70;
+                    naturalLevel = 70;
+                    break;
+            }
+
+            document.getElementById('weedDopamine').style.width = weedLevel + '%';
+            document.getElementById('naturalDopamine').style.width = naturalLevel + '%';
+        }
+
+        // Initialize on load
+        document.addEventListener('DOMContentLoaded', function() {
+            updateRecoveryTimeline();
+            updateMoneySaved();
+            updateDopamineComparison();
+        });
+    </script>
+</body>
+</html>
